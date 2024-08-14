@@ -1,0 +1,69 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add User</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<div class="container">
+  <h2>Dodavanje novog korisnika</h2>
+  <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+    <div class="form-group">
+      <label for="firstName">Ime:</label>
+      <input type="text" id="firstName" name="firstName" class="form-control" required [(ngModel)]="user.firstName">
+    </div>
+    <div class="form-group">
+      <label for="lastName">Prezime:</label>
+      <input type="text" id="lastName" name="lastName" class="form-control" required [(ngModel)]="user.lastName">
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" class="form-control" required [(ngModel)]="user.email">
+    </div>
+    <div class="form-group">
+      <label>Permisije:</label>
+      <label>
+        <input type="checkbox" name="permissions" value="can_read_users" [(ngModel)]="read" /> can_read_users
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" name="permissions" value="can_write_users" [(ngModel)]="write" /> can_write_users
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" name="permissions" value="can_delete_users" [(ngModel)]="delete" /> can_delete_users
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" name="permissions" value="can_update_users" [(ngModel)]="update" /> can_update_users
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" name="permissions" value="can_start_machine" [(ngModel)]="startMachine" /> can_start_machine
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" name="permissions" value="can_stop_machine" [(ngModel)]="stopMachine" /> can_stop_machine
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" name="permissions" value="can_search_machine" [(ngModel)]="searchMachine" /> can_search_machine
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" name="permissions" value="can_restart_machine" [(ngModel)]="restartMachine" /> can_restart_machine
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" name="permissions" value="can_create_machine" [(ngModel)]="createMachine" /> can_create_machine
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" name="permissions" value="can_destroy_machine" [(ngModel)]="destroyMachine" /> can_destroy_machine
+      </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Dodaj korisnika</button>
+  </form>
+  <div *ngIf="error" class="alert alert-danger mt-3">
+    {{ error }}
+  </div>
+</div>

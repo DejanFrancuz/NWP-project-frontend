@@ -1,0 +1,19 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Machine Registration</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<div class="container">
+  <h2>Registracija nove mašine</h2>
+  <form (ngSubmit)="onSubmit()" #machineForm="ngForm">
+    <div class="form-group">
+      <label for="status">Status:</label>
+      <input type="text" id="status" name="status" class="form-control" required [(ngModel)]="status">
+    </div>
+    <button type="submit" class="btn btn-primary">Registruj mašinu</button>
+  </form>
+  <div *ngIf="error" class="alert alert-danger mt-3">
+    {{ error }}
+  </div>
+</div>

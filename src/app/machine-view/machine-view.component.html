@@ -1,0 +1,83 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Machine View</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<div class="container mt-5">
+  <h2>Machine List</h2>
+  <form class="mb-3">
+    <div class="form-group">
+      <label for="searchName">Name:</label>
+      <input type="text" id="searchName" name="searchName" class="form-control" [(ngModel)]="searchName">
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" name="startedStatus" type="checkbox" id="startedStatus" value="running"  (change)="updateSelection('running', $event)">
+      <label class="form-check-label" for="startedStatus">Running</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" name="stoppedStatus" type="checkbox" id="stoppedStatus" value="stopped" (change)="updateSelection('stopped', $event)">
+      <label class="form-check-label" for="stoppedStatus">Stopped</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" name="dischargingStatus" type="checkbox" id="dischargingStatus" value="discharging"  (change)="updateSelection('discharging', $event)">
+      <label class="form-check-label" for="dischargingStatus">Discharging</label>
+    </div>
+        <div class="form-group">
+      <label for="startDate">Start Date:</label>
+      <input type="date" id="startDate" name="startDate" class="form-control" [(ngModel)]="searchStartDate">
+    </div>
+        <div class="form-group">
+      <label for="endDate">End Date:</label>
+      <input type="date" id="endDate" name="endDate" class="form-control" [(ngModel)]="searchEndDate">
+    </div>
+    <button type="submit" (click)="searchMachines()" class="btn btn-primary">Search</button>
+  </form>
+
+  <ng-container *ngIf="machines && machines.length > 0; else noMachines">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Created By</th>
+        <th>Created Date</th>
+        <th>Active</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let machine of machines" (click)="selectMachine(machine)">
+        <td>{{ machine.id }}</td>
+        <td>{{ machine.name }}</td>
+        <td>{{ machine.status }}</td>
+        <td>{{ machine.createdBy.email }}</td>
+        <td>{{ machine.dateCreated | date:'yyyy-MM-dd' }}</td>
+        <td>{{ machine.active ? 'Da' : 'Ne' }}</td>
+        <button (click)="deleteMachine(machine.id)" class="btn btn-link text-danger" style="padding: 0; margin-left: 10px;"
+                *ngIf="machine.id !== undefined && hasPermission('can_destroy_machine')">
+          <i class="fas fa-times"></i>
+        </button>
+      </tr>
+      </tbody>
+    </table>
+  </ng-container>
+  <ng-template #noMachines>
+    <p>Nema dostupnih mašina.</p>
+  </ng-template>
+
+  <div *ngIf="selectedMachine">
+    <h3>Odabrana mašina</h3>
+    <p>ID: {{ selectedMachine.id }}</p>
+    <p>Name: {{ selectedMachine.name }}</p>
+    <p>Status: {{ selectedMachine.status }}</p>
+    <p>Created By: {{ selectedMachine.createdBy.email }}</p>
+    <p>Date Created: {{ selectedMachine.dateCreated }}</p>
+    <p>Active: {{ selectedMachine.active ? 'Da' : 'Ne' }}</p>
+    <!-- Dugmad za Start, Stop i Restart -->
+    <button class="btn btn-success" (click)="startMachine(selectedMachine)" [disabled]="!hasPermission('can_start_machine')">Start</button>
+    <button class="btn btn-danger" (click)="stopMachine(selectedMachine)" [disabled]="!hasPermission('can_stop_machine')">Stop</button>
+    <button class="btn btn-warning" (click)="restartMachine(selectedMachine)" [disabled]="!hasPermission('can_restart_machine')">Restart</button>
+  </div>
+</div>

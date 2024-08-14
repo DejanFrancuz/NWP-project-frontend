@@ -1,0 +1,66 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Edit</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<div class="container mt-5">
+  <h2>Edit User</h2>
+  <form (ngSubmit)="saveUser()">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" name="firstName" class="form-control" [(ngModel)]="user.firstName" required>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="lastName" class="form-control" [(ngModel)]="user.lastName" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" class="form-control" [(ngModel)]="user.email" required>
+    </div>
+    <div class="form-group">
+      <label>Permisije:</label>
+      <label>
+        <input type="checkbox" name="read" value="can_read_users" [(ngModel)]="read" /> can_read_users
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" name="write" value="can_write_users" [(ngModel)]="write" /> can_write_users
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" name="delete" value="can_delete_users" [(ngModel)]="delete" /> can_delete_users
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" name="update" value="can_update_users" [(ngModel)]="update" /> can_update_users
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" name="start-machine" value="can_start_machine" [(ngModel)]="startMachine" /> can_start_machine
+      </label>
+    </div>
+    <br />
+    <label>
+      <input type="checkbox" name="stop-machine" value="can_stop_machine" [(ngModel)]="stopMachine" /> can_stop_machine
+    </label>
+    <br />
+    <label>
+      <input type="checkbox" name="restart-machine" value="can_restart_machine" [(ngModel)]="restartMachine" /> can_restart_machine
+    </label>
+    <br />
+    <label>
+      <input type="checkbox" name="create-machine" value="can_create_machine" [(ngModel)]="createMachine" /> can_create_machine
+    </label>
+    <br />
+    <label>
+      <input type="checkbox" name="search-machine" value="can_search_machine" [(ngModel)]="searchMachine" /> can_search_machine
+    </label>
+    <br />
+    <label>
+      <input type="checkbox" name="destroy-machine" value="can_destroy_machine" [(ngModel)]="destroyMachine" /> can_destroy_machine
+    </label>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>

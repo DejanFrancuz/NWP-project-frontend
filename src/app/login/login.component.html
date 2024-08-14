@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<form action="/submit" method="POST">
+  <label for="email">Email:</label>
+  <input [(ngModel)] = "email" type="email" id="email" name="email" required><br><br>
+
+  <label for="password">Password:</label>
+  <input [(ngModel)] = "password" type="password" id="password" name="password" required><br><br>
+
+  <button type="submit" (click)= "onSubmit()" >Submit</button>
+</form>
+</body>
+</html>

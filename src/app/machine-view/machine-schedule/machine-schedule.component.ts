@@ -22,7 +22,6 @@ export class MachineScheduleComponent {
 
   onDateSelect() {
     const selectedDate = new Date(this.year, this.month - 1, this.day, this.hours, this.minutes, this.seconds);
-    console.log("selected date is: ", selectedDate);
     const schedule: Schedule = {
       executionDateTime: selectedDate,
       machineOperation: this.operationType

@@ -37,15 +37,12 @@ export class MachineService {
     params = params.append('status', status.toUpperCase());
   });
 
-  console.log("wuery: ", query);
-  console.log("params: ", params);
-
     return this.httpClient.get<Machine[]>(`${this.apiUrl}/search`, { params: params});
   }
 
   scheduleOperation(schedule: Schedule): Observable<any>{
 
-    const timezoneOffset = new Date().getTimezoneOffset() / 60; // U satima
+    const timezoneOffset = new Date().getTimezoneOffset() / 60;
 
     schedule.executionDateTime = new Date(schedule.executionDateTime.getTime() - timezoneOffset * 60 * 60 * 1000);
 

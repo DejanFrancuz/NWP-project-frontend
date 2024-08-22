@@ -2,7 +2,7 @@ import {machineEnvironment, userEnvironment} from "../../environments/login.envi
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {catchError, Observable, pipe, throwError} from "rxjs";
-import {Machine, MachineStatus, QueryRequest, User} from "../model";
+import {Machine, MachineStatus, QueryRequest, Schedule, User} from "../model";
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +41,15 @@ export class MachineService {
   console.log("params: ", params);
 
     return this.httpClient.get<Machine[]>(`${this.apiUrl}/search`, { params: params});
+  }
+
+  scheduleOperation(schedule: Schedule): Observable<any>{
+
+    const timezoneOffset = new Date().getTimezoneOffset() / 60; // U satima
+
+    schedule.executionDateTime = new Date(schedule.executionDateTime.getTime() - timezoneOffset * 60 * 60 * 1000);
+
+    return this.httpClient.put<any>(`${this.apiUrl}/schedule`, schedule);
   }
 
   startMachine (machine: Machine): Observable<any>{

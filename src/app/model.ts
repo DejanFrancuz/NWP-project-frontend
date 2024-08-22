@@ -26,6 +26,17 @@ export interface Machine{
   dateCreated: Date,
   active: boolean
 }
+export interface Schedule{
+  id?: number,
+  machineOperation: MachineOperation,
+  executionDateTime: Date,
+  machine?: Machine
+}
 
-export enum MachineStatus{ STOPPED, RUNNING}
+export enum MachineOperation { 
+  START = 'START',
+  STOP = 'STOP',
+  DISCHARGE = 'DISCHARGE'
+}
 
+export enum MachineStatus{ STOPPED, RUNNING, DISCHARGING }

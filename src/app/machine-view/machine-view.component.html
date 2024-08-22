@@ -80,4 +80,8 @@
     <button class="btn btn-danger" (click)="stopMachine(selectedMachine)" [disabled]="!hasPermission('can_stop_machine')">Stop</button>
     <button class="btn btn-warning" (click)="restartMachine(selectedMachine)" [disabled]="!hasPermission('can_restart_machine')">Restart</button>
   </div>
+
+  <app-machine-schedule
+  (dateSelected)="scheduleDate($event)"
+  ></app-machine-schedule>
 </div>

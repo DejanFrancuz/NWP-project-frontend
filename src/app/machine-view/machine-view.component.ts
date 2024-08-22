@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Machine, MachineStatus, QueryRequest, User} from '../model';
+import {Machine, MachineStatus, QueryRequest, Schedule, User} from '../model';
 import { MachineService } from '../services/machine.service';
 import {UserService} from "../services/user.service";
 
@@ -15,6 +15,8 @@ export class MachineViewComponent implements OnInit {
   searchStatus: string[] = [];
   searchStartDate: Date = new Date();
   searchEndDate: Date = new Date();
+
+  scheduledOperation: Schedule | null = null;
 
   query: QueryRequest = {
     name: '',
@@ -66,6 +68,12 @@ export class MachineViewComponent implements OnInit {
     this.machineService.searchMachine(this.query).subscribe((data: Machine[]) => {
       this.machines = data;
     });
+  }
+
+  scheduleDate(schedule: Schedule) {
+    this.scheduledOperation = schedule;
+    schedule.machine = this.selectedMachine;
+    this.machineService.scheduleOperation(this.scheduledOperation).subscribe();
   }
 
   hasPermission(permission: string): boolean {

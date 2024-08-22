@@ -4,6 +4,7 @@ import {LoginRequest} from "../model";
 import {Observable} from "rxjs";
 import {JWT_OPTIONS, JwtHelperService, JwtModule} from '@auth0/angular-jwt';
 import {UserService} from "../services/user.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent {
   password: string = "";
   req: LoginRequest = { username: "", password: "" };
 
-  constructor(private loginService: LoginService, private jwtHelper: JwtHelperService, private userService: UserService) {}
+  constructor(private loginService: LoginService, private jwtHelper: JwtHelperService, private userService: UserService, private router: Router) {}
 
   onSubmit(){
     this.req = {
@@ -30,6 +31,7 @@ export class LoginComponent {
           if (authorities) {
             localStorage.setItem('authorities', JSON.stringify(authorities));
           }
+          this.router.navigateByUrl('view');
       },
       error: (error) => {
         localStorage.removeItem('token');

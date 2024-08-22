@@ -16,6 +16,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {JwtHelperService, JwtModule} from "@auth0/angular-jwt";
 import { MachineViewComponent } from './machine-view/machine-view.component';
 import { MachineRegistrationComponent } from './machine-registration/machine-registration.component';
+import { MachineScheduleComponent } from './machine-view/machine-schedule/machine-schedule.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MachineRegistrationComponent } from './machine-registration/machine-reg
     RegistrationComponent,
     UserEditComponent,
     MachineViewComponent,
-    MachineRegistrationComponent
+    MachineRegistrationComponent,
+    MachineScheduleComponent
   ],
   imports: [
     BrowserModule,
